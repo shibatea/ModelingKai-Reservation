@@ -73,10 +73,12 @@ namespace Cli
             catch (UI入出力がおかしいぞException e)
             {
                 Console.WriteLine ("なんかおかしい", e);
+                throw;
             }
             catch (ドメインエラーException e)
             {
                 Console.WriteLine ("なんかおかしい", e);
+                throw;
             }
         }
     }

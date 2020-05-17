@@ -2,6 +2,7 @@
 using Cli.Applications;
 using Reservation.Domain.Reservations;
 using Reservation.Infrastructure;
+using Reservation.Infrastructure.SQLite;
 
 namespace Cli
 {
@@ -9,6 +10,8 @@ namespace Cli
     {
         static void Main(string[] args)
         {
+            Sample.Reservation();
+
             InitializeApplication().Run(args);
         }
 
