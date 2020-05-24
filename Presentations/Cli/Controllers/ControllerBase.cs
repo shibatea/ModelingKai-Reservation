@@ -3,13 +3,13 @@ using Cli.Exceptions;
 using Microsoft.Extensions.Logging;
 using Reservation.Domain.Exceptions;
 
-namespace Cli.Applications
+namespace Cli.Controllers
 {
-    public abstract class BaseApplication : IApplication
+    public abstract class ControllerBase : IController
     {
-        protected readonly ILogger<IApplication> Logger;
+        protected readonly ILogger<IController> Logger;
 
-        protected BaseApplication(ILogger<IApplication> logger)
+        protected ControllerBase(ILogger<IController> logger)
         {
             Logger = logger;
         }
@@ -27,16 +27,16 @@ namespace Cli.Applications
             }
             catch (UI入出力がおかしいぞException e)
             {
-                Logger.LogError("UIなんかおかしい", e);
+                Logger.LogError(e, "UIなんかおかしい");
             }
             catch (ドメインエラーException e)
             {
-                Logger.LogError("ドメインなんかおかしい", e);
+                Logger.LogError(e, "ドメインなんかおかしい");
             }
             catch (Exception e)
             {
                 // TODO: システム例外/アプリケーション例外/ドメイン例外をどうする？
-                Logger.LogError("予期せぬエラーです", e);
+                Logger.LogError(e, "予期せぬエラーです");
             }
             finally
             {
