@@ -1,4 +1,6 @@
-﻿using Reservation.Infrastructure.SQLite.Reservation;
+﻿using System;
+using System.Linq;
+using Reservation.Infrastructure.SQLite.Reservation;
 
 namespace Reservation.Infrastructure.SQLite
 {
@@ -41,7 +43,31 @@ namespace Reservation.Infrastructure.SQLite
             using var db = new ReservationContext();
 
             // Create
-            db.Add(new Reservation.Reservation { Id = 1, RoomName = "A" });
+            db.Add(new Reservation.Reservation
+            {
+                Id = 4,
+                RoomName = "A",
+                StartDateTime = DateTime.UtcNow,
+                EndDateTime = DateTime.UtcNow.AddHours(1)
+            });
+            db.SaveChanges();
+
+            // Read
+            var reservation = db.Reservations
+                .OrderBy(r => r.Id)
+                .First();
+
+            // Read filter DateTime
+            var reservation2 = db.Reservations
+                .OrderByDescending(r => r.Id)
+                .First(r => r.EndDateTime > DateTime.UtcNow);
+
+            // Update
+            reservation.EndDateTime = DateTime.UtcNow.AddHours(2);
+            db.SaveChanges();
+
+            // Delete
+            db.Remove(reservation);
             db.SaveChanges();
         }
     }

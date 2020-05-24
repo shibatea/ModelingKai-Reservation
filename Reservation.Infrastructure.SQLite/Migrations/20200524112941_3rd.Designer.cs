@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Reservation.Infrastructure.SQLite.Reservation;
 
 namespace Reservation.Infrastructure.SQLite.Migrations
 {
     [DbContext(typeof(ReservationContext))]
-    partial class ReservationContextModelSnapshot : ModelSnapshot
+    [Migration("20200524112941_3rd")]
+    partial class _3rd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,8 +31,7 @@ namespace Reservation.Infrastructure.SQLite.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RoomName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(20);
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("TEXT");
